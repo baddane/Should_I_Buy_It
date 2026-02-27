@@ -179,7 +179,7 @@ export default function Home() {
     const finalProduct: Product = product?.scrapeFailed
       ? {
           ...(product as Product),
-          title: manualTitle || 'Produit Amazon',
+          title: manualTitle || product?.title || 'Produit Amazon',
           price: manualPrice || '?',
         }
       : (product as Product);
@@ -318,15 +318,15 @@ export default function Home() {
               <div className="flex-1 min-w-0">
                 {product.scrapeFailed ? (
                   <div>
-                    <p className="text-amber-400 text-xs mb-3">
-                      😅 Amazon nous a bloqués… aide-nous un peu&nbsp;:
+                    <p className="text-zinc-500 text-xs mb-3">
+                      Confirme ou complète les infos&nbsp;:
                     </p>
                     <input
                       type="text"
                       value={manualTitle}
                       onChange={(e) => setManualTitle(e.target.value)}
-                      placeholder="Nom du produit"
-                      className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm mb-2 focus:outline-none focus:border-red-500 transition-colors placeholder-zinc-600"
+                      placeholder={product.title || 'Nom du produit'}
+                      className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm mb-2 focus:outline-none focus:border-red-500 transition-colors placeholder-zinc-500"
                     />
                     <input
                       type="text"
